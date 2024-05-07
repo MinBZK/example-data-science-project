@@ -5,7 +5,7 @@
       "name": "Project",
       "type": "debugpy",
       "request": "launch",
-      "module": "python_project",
+      "module": "example_datascience",
       "justMyCode": false,
       "args": []
     },

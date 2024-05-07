@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "python_project"
+name = "example_datascience"
 version = "0.1.0"
 description = ""
 authors = ["ai-validation-team <ai-validation@minibzk.nl>"]
@@ -7,6 +7,8 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pandas = "^2.2.2"
+faker = "^25.0.1"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.2.0"
@@ -46,7 +48,7 @@ fail_under = 95
 
 [tool.coverage.html]
 directory = "htmlcov"
-title = "python_project"
+title = "example_datascience"
 
 
 [tool.pytest.ini_options]

@@ -2,21 +2,16 @@
 
 ## Description
 
-This is a template repository that can be used for Python 3.11 projects and uses the Poetry package manager. By default this project sets up the following:
+This repository is a typical example of a data science project written in Python and is used for testing purposes when
+we need to have a more truthful example of an algorithm in use by the Dutch Government.
 
-* Devcontainers for VSCode users
-* Github community health files
-* Github Dependabot
-* VSCode configs
-* Some scripts to adhere to programming standards
-* A editorconfig file so editors enforce formatting
-* A default .gitgignore
-* A default pre-commit-config
-* A EUPL v1.2 Licence
-* A basic Docker setup
-* publiccode.yml
+The typical steps will be done:
 
-## How to use this template repository
+1. prepping data
+2. training models
+3. evaluating models
+4. serving a result
+5. monitoring
 
 When creating a new Repository select this template repository as the base.
 

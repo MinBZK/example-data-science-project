@@ -44,7 +44,7 @@ RUN coverage report --fail-under 95
 
 FROM project-base as production
 
-COPY ./python_project /app/python_project
+COPY example_datascience /app/example_datascience
 
 # change this to a usefull command
-CMD ["python", "-m", "python_project" ]
+CMD ["python", "-m", "example_datascience" ]

@@ -9,10 +9,10 @@ description:
   en:
     features:
       - Python Template
-    genericName: python_project
+    genericName: example_datascience
     longDescription: |
-      This a an example python template project.
-    shortDescription: Python Template project
+      This a an example data science project
+    shortDescription: Example Data Science project
 developmentStatus: concept
 legal:
   license: EUPL-1.2
@@ -24,9 +24,9 @@ maintenance:
   contacts:
     - name: AI Validatie
   type: community
-name: python_project
+name: example_datascience
 platforms:
   - web
 releaseDate: '2024-04-25'
 softwareType: standalone/web
-url: 'https://github.com/MinBZK/python-project-template'
+url: 'https://github.com/MinBZK/example-data-science-project'
