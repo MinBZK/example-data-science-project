@@ -8,7 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 pandas = "^2.2.2"
-faker = "^25.0.1"
+faker = "^25.1.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.2.0"
