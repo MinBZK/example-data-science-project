@@ -6,9 +6,17 @@ authors = ["ai-validation-team <ai-validation@minibzk.nl>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
-pandas = "^2.2.2"
-faker = "^25.0.1"
+python = ">=3.11,<3.13"
+kaleido = "0.2.1"
+pycaret = "^3.3.2"
+pandas = "2.1.4"
+kaggle = "^1.6.12"
+xgboost = "^2.0.3"
+catboost = "^1.2.5"
+mlflow = "^2.12.1"
+fairlearn = "^0.10.0"
+matplotlib = "3.7.5"
+aif360 = "^0.6.1"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.2.0"
@@ -34,7 +42,7 @@ select = ["I", "SIM", "B", "UP", "F", "E"]
 fixable = ["ALL"]
 
 [tool.pyright]
-pythonVersion = "3.11"
+pythonVersion = ">=3.11,<3.13"
 typeCheckingMode = "strict"
 reportMissingImports = true
 reportMissingTypeStubs = true
