@@ -12,7 +12,5 @@ def download_from_kaggle(datapath):
     """
     if not os.path.isfile(datapath):
         kaggle.api.authenticate()
-        kaggle.api.dataset_download_files('ictinstitute/utrecht-fairness-recruitment-dataset',
-                                          path='./',
-                                          unzip=True)
+        kaggle.api.dataset_download_files("ictinstitute/utrecht-fairness-recruitment-dataset", path="./", unzip=True)
     return 0

@@ -2,7 +2,15 @@ import sys
 import pandas as pd
 import numpy as np
 from pycaret.classification import ClassificationExperiment, create_model, check_fairness
-from fairlearn.metrics import MetricFrame, selection_rate, false_positive_rate, false_negative_rate, count, demographic_parity_ratio, demographic_parity_difference
+from fairlearn.metrics import (
+    MetricFrame,
+    selection_rate,
+    false_positive_rate,
+    false_negative_rate,
+    count,
+    demographic_parity_ratio,
+    demographic_parity_difference,
+)
 from sklearn.metrics import accuracy_score, precision_score
 from fairlearn.reductions import DemographicParity, ExponentiatedGradient
 from aif360.metrics import BinaryLabelDatasetMetric
@@ -27,10 +35,10 @@ def exploratory_data_analysis():
     implementated to give you an idea.
     :return: pd.Dataframe containing the data
     """
-    datapath = './data/recruitmentdataset-2022-1.3.csv'
+    datapath = "./data/recruitmentdataset-2022-1.3.csv"
     download_from_kaggle(datapath)
 
-    df = pd.read_csv(datapath, index_col='Id')
+    df = pd.read_csv(datapath, index_col="Id")
 
     # print(df.head()) # The data is about whether based on some characteristic people are hired or not
     # print(df.shape) # There are 4000 datapoints with 13 feature columns and 1 label column
@@ -38,8 +46,18 @@ def exploratory_data_analysis():
     # print(df.isna().sum()) # There are no missing values
     # print(df.describe()) # There are just 3 numerical features, which are the age, university grade, and languages.
     # print(df.columns)
-    cat_cols = ['gender', 'nationality', 'sport', 'ind-debateclub', 'ind-programming_exp', 'ind-international_exp',
-                'ind-entrepeneur_exp', 'ind-exact_study', 'company', 'decision']
+    cat_cols = [
+        "gender",
+        "nationality",
+        "sport",
+        "ind-debateclub",
+        "ind-programming_exp",
+        "ind-international_exp",
+        "ind-entrepeneur_exp",
+        "ind-exact_study",
+        "company",
+        "decision",
+    ]
 
     for col in cat_cols:
         categories = df.groupby(col).size()
@@ -63,16 +81,22 @@ def preprocessing_data(data):
     preprocessor_pipeline = ColumnTransformer(
         [
             ("numerical", StandardScaler(), ["age", "ind-university_grade", "ind-languages"]),
-            ("categorical", OneHotEncoder(sparse_output=False), ["gender",
-                                                                 "nationality",
-                                                                 "sport",
-                                                                 "ind-degree",
-                                                                 "company",
-                                                                 "ind-debateclub",
-                                                                 "ind-programming_exp",
-                                                                 "ind-international_exp",
-                                                                 "ind-exact_study",
-                                                                 "ind-entrepeneur_exp"]),
+            (
+                "categorical",
+                OneHotEncoder(sparse_output=False),
+                [
+                    "gender",
+                    "nationality",
+                    "sport",
+                    "ind-degree",
+                    "company",
+                    "ind-debateclub",
+                    "ind-programming_exp",
+                    "ind-international_exp",
+                    "ind-exact_study",
+                    "ind-entrepeneur_exp",
+                ],
+            ),
         ],
         verbose_feature_names_out=False,
     )
@@ -98,15 +122,13 @@ def training_model(preprocessing_pipeline, x_data, y_data, exploratory_model_ana
         # This piece of code will run a couple of models with PyCaret, and will generate summary statistics for the
         # models like accuracy, and F-Score.
         exp = ClassificationExperiment()
-        x_data['decision'] = y_data
-        exp.setup(x_data, target='decision', system_log='./data/logs.log')
+        x_data["decision"] = y_data
+        exp.setup(x_data, target="decision", system_log="./data/logs.log")
         exp.compare_models()
         # From this exploratory training analysis comes forward that boosting methods are the best w.r.t. Accuracy, so
         # moving forward in the scikit learn pipeline the lightGBM Classifier will be used.
 
-    classifier = Pipeline(steps=[
-        ('classifier', lgb.LGBMClassifier())
-    ])
+    classifier = Pipeline(steps=[("classifier", lgb.LGBMClassifier())])
     classifier.fit(x_data, y_data)
     # potential improvement to use a cross validation instead of fit (to overcome overfitting) like
     from sklearn.model_selection import RandomizedSearchCV
@@ -123,12 +145,10 @@ def training_model(preprocessing_pipeline, x_data, y_data, exploratory_model_ana
     # classifier = search.best_estimator_
 
     # store the preprocessing pipeline together with the classifier pipeline for later serving of the model
-    complete_pipeline = Pipeline(steps=[
-        ('Preprocessing', preprocessing_pipeline),
-        ('classifier', classifier)
-    ])
-    joblib.dump(complete_pipeline, './data/model/recruitment_lightgbm_model.pkl')
+    complete_pipeline = Pipeline(steps=[("Preprocessing", preprocessing_pipeline), ("classifier", classifier)])
+    joblib.dump(complete_pipeline, "./data/model/recruitment_lightgbm_model.pkl")
     return 0
+
 
 def evaluating_model(classifier, x_data, y_data):
     """
@@ -143,6 +163,7 @@ def evaluating_model(classifier, x_data, y_data):
     """
     return 0
 
+
 def serving_a_model(data):
     """
     This function will 'serve' the model, normally when serving a model one would include the preprocessing steps also
@@ -152,8 +173,9 @@ def serving_a_model(data):
     :param data: Pandas Dataframe containing the data
     :return: prediction_results: a list of boolean values for each datapoint a prediction
     """
-    complete_pipeline = joblib.load('./data/model/recruitment_lightgbm_model.pkl')
+    complete_pipeline = joblib.load("./data/model/recruitment_lightgbm_model.pkl")
     return complete_pipeline.predict(data)
+
 
 def monitor_the_model():
     """
@@ -169,23 +191,26 @@ def convert_to_standard_dataset_for_aif360(df, target_label_name, scores_name=""
     protected_attributes = []
 
     # columns from the dataset that we want to select for this Bias study
-    selected_features = ['gender', 'age']
+    selected_features = ["gender", "age"]
 
     privileged_classes = [[]]
 
     favorable_target_label = [1]
 
     # List of column names in the DataFrame which are to be expanded into one-hot vectors.
-    categorical_features = ['gender', 'nationality', 'sport', 'ind-degree', 'company']
+    categorical_features = ["gender", "nationality", "sport", "ind-degree", "company"]
 
     # create the `StandardDataset` object
-    standard_dataset = StandardDataset(df=df, label_name=target_label_name,
-                                       favorable_classes=favorable_target_label,
-                                       scores_name=scores_name,
-                                       protected_attribute_names=protected_attributes,
-                                       privileged_classes=privileged_classes,
-                                       categorical_features=categorical_features,
-                                       features_to_keep=selected_features)
+    standard_dataset = StandardDataset(
+        df=df,
+        label_name=target_label_name,
+        favorable_classes=favorable_target_label,
+        scores_name=scores_name,
+        protected_attribute_names=protected_attributes,
+        privileged_classes=privileged_classes,
+        categorical_features=categorical_features,
+        features_to_keep=selected_features,
+    )
     if scores_name == "":
         standard_dataset.scores = standard_dataset.labels.copy()
 
@@ -195,7 +220,7 @@ def convert_to_standard_dataset_for_aif360(df, target_label_name, scores_name=""
 def main() -> int:
     data = exploratory_data_analysis()
     preprocessor_pipeline, preprocessed_data = preprocessing_data(data)
-    training_model(preprocessor_pipeline, preprocessed_data, data['decision'], exploratory_model_analysis=False)
+    training_model(preprocessor_pipeline, preprocessed_data, data["decision"], exploratory_model_analysis=False)
     serving_a_model(data)
 
     # # models = exp.compare_models(include=['lr', 'dt', 'knn', 'catboost'])
@@ -289,10 +314,9 @@ def main() -> int:
     # #                                              privileged_groups=[{'Gender': 'male'}])
     # print(metric_orig_train)
 
-
-
     # bias mitigating results
     return 0
+
 
 if __name__ == "__main__":  # pragma: no cover
     sys.exit(main())

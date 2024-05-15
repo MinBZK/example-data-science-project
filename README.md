@@ -1,4 +1,4 @@
-# Explame Data Science Project
+# Example Data Science Project
 
 ## Description
 
@@ -14,7 +14,7 @@ The typical steps will be done:
 4. serving a result
 5. monitoring
 
-The steps does not follow a linear path, but actually loops back whenever one notices models do not have wanted
+The steps do not follow a linear path, but actually loops back whenever one notices models do not have wanted
 features.
 
 ## Tools used
@@ -22,7 +22,11 @@ features.
 Different frameworks are used for different stages in the project, for the exploratory data analyses `PyCaret` is used to
 very quickly check a bunch of models and in which direction to build the "production" model later. For the "production"
 model, `scikitlearn` is used to generate a not deep machine learning model. For the analysis on fairness and mitigation
-of bias both `FairLearn` and `AIF360` are used. Possible extensions are to use experiment tracking with `MLflow`.
+of bias both `FairLearn` and `AIF360` are used. Possible extensitons are:
 
-This repository is inspired by the 
+- For the analysis on data drift for the monitoring of the model `evidentlyai`
+
+- For experiment tracking with `MLflow`.
+
+This repository is inspired by the
 [Thesis of Guusje Juijn](https://studenttheses.uu.nl/bitstream/handle/20.500.12932/43868/Thesis%20Guusje%20Final%20Version.pdf?sequence=1&isAllowed=y)
