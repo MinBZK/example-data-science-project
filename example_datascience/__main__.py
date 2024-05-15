@@ -1,29 +1,18 @@
 import sys
-import pandas as pd
-import numpy as np
-from pycaret.classification import ClassificationExperiment, create_model, check_fairness
-from fairlearn.metrics import (
-    MetricFrame,
-    selection_rate,
-    false_positive_rate,
-    false_negative_rate,
-    count,
-    demographic_parity_ratio,
-    demographic_parity_difference,
-)
-from sklearn.metrics import accuracy_score, precision_score
-from fairlearn.reductions import DemographicParity, ExponentiatedGradient
-from aif360.metrics import BinaryLabelDatasetMetric
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.preprocessing import StandardScaler
-from sklearn.compose import ColumnTransformer
-from aif360.datasets import StandardDataset
-from data.download_dataset import download_from_kaggle
-import lightgbm as lgb
-from sklearn.pipeline import make_pipeline
-from sklearn.pipeline import Pipeline
-from sklearn.model_selection import cross_val_predict
+
 import joblib
+import lightgbm as lgb
+import numpy as np
+import pandas as pd
+from evidently.test_suite import TestSuite
+from evidently.tests import TestColumnDrift
+from fairlearn.metrics import MetricFrame, demographic_parity_difference, selection_rate
+from pycaret.classification import ClassificationExperiment
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+
+from data.download_dataset import download_from_kaggle
 
 np.random.seed(69)
 
@@ -40,12 +29,11 @@ def exploratory_data_analysis():
 
     df = pd.read_csv(datapath, index_col="Id")
 
-    # print(df.head()) # The data is about whether based on some characteristic people are hired or not
-    # print(df.shape) # There are 4000 datapoints with 13 feature columns and 1 label column
-    # print(df[df.duplicated()]) # There are 39 duplicate values, but this is to be expected based on the categorical features
-    # print(df.isna().sum()) # There are no missing values
-    # print(df.describe()) # There are just 3 numerical features, which are the age, university grade, and languages.
-    # print(df.columns)
+    df.head()  # The data is about whether based on some characteristic people are hired or not
+    df.shape  # There are 4000 datapoints with 13 feature columns and 1 label column
+    df[df.duplicated()]  # There are 39 duplicate values, but this is to be expected based on the categorical features
+    df.isna().sum()  # There are no missing values
+    df.describe()  # There are just 3 numerical features, which are the age, university grade, and languages.
     cat_cols = [
         "gender",
         "nationality",
@@ -68,7 +56,7 @@ def exploratory_data_analysis():
     return df
 
 
-def preprocessing_data(data):
+def preprocessing_data(data: pd.DataFrame) -> (Pipeline, pd.DataFrame):
     """
     Preprocessing of the dataset, on the one hand for the AIF360 we need to parse the dataset to a StandardDataset
     which is an object needed to be able to use the features of AIF360. Also for the machine learning models it is very
@@ -105,7 +93,13 @@ def preprocessing_data(data):
     return preprocessor_pipeline, preprocessed_data
 
 
-def training_model(preprocessing_pipeline, x_data, y_data, exploratory_model_analysis=False):
+def training_model(
+    preprocessing_pipeline: Pipeline,
+    x_data: pd.DataFrame,
+    y_data: pd.DataFrame,
+    raw_data: pd.DataFrame,
+    exploratory_model_analysis: bool = False,
+) -> int:
     """
     This function will train a model on the dataframe provided
     :param preprocessing_pipeline: sklearn pipeline with the preprocessing steps for the dataset
@@ -130,8 +124,11 @@ def training_model(preprocessing_pipeline, x_data, y_data, exploratory_model_ana
 
     classifier = Pipeline(steps=[("classifier", lgb.LGBMClassifier())])
     classifier.fit(x_data, y_data)
+
+    ## Cross validation
     # potential improvement to use a cross validation instead of fit (to overcome overfitting) like
     from sklearn.model_selection import RandomizedSearchCV
+
     # param_dist = {
     #     'classifier__bagging_fraction': (0.5, 0.8),
     #     'classifier__feature_fraction': (0.5, 0.8),
@@ -143,32 +140,49 @@ def training_model(preprocessing_pipeline, x_data, y_data, exploratory_model_ana
     #                             n_iter=10, verbose=True, param_distributions=param_dist)
     # search.fit(x_data, y_data)
     # classifier = search.best_estimator_
-
     # store the preprocessing pipeline together with the classifier pipeline for later serving of the model
     complete_pipeline = Pipeline(steps=[("Preprocessing", preprocessing_pipeline), ("classifier", classifier)])
+
+    ## Mitigation with fairlearn for gender bias
+    # exponentiated_gradient = ExponentiatedGradient(
+    #     estimator=complete_pipeline,
+    #     constraints=DemographicParity(),
+    #     sample_weight_name="classifier__classifier__sample_weight",
+    # )
+    # exponentiated_gradient.fit(raw_data, y_data, sensitive_features=raw_data["gender"])
+    # complete_pipeline = exponentiated_gradient
+
     joblib.dump(complete_pipeline, "./data/model/recruitment_lightgbm_model.pkl")
     return 0
 
 
-def evaluating_model(classifier, x_data, y_data):
+def evaluating_model(data: pd.DataFrame) -> int:
     """
     This function will evaluate a model whether it adheres to specific requirements we set. Specifically whether it
     adheres to bias requirements. If it doesn't adhere we need to go back in the previous steps and fix the
     preprocessing steps or the model hyperparameters. As this is an exmaple project, only suggestions will be done and
     not implemented as this would worsen the flow of the script.
-    :param classifier: sklearn pipeline with the classifier model in it
-    :param x_data:
-    :param y_data:
-    :return:
+    :param data: The data to look at the bias metrics to
+    :return: 0
     """
+    y_pred = serving_a_model(data)
+    y_true = data.loc[:, "decision"]
+    gender = data.loc[:, "gender"]
+    dp = demographic_parity_difference(y_true=y_true, y_pred=y_pred, sensitive_features=gender)
+    sr = MetricFrame(metrics=selection_rate, y_true=y_true, y_pred=y_pred, sensitive_features=gender)
+    # print(dp)
+    # print(sr.by_group)
+    # The difference in demographic parirty is 0.25, this means that there is a 25% difference between the amount of
+    # times that the 'lowest' gender gets selected compared to the highest. In this case that is between 'female' and
+    # 'other'. This gives us reason to mitigate this bias for gender in the original model.
     return 0
 
 
-def serving_a_model(data):
+def serving_a_model(data: pd.DataFrame) -> list:
     """
     This function will 'serve' the model, normally when serving a model one would include the preprocessing steps also
     within the model/pipeline. Therefore, this way of passing just the classifier and the preprocessed data would not
-    suffice. Also the serving of a model is generally that to an API/package you pass the input data and get the
+    suffice. Also, the serving of a model is generally that to an API/package you pass the input data and get the
     predicted result back.
     :param data: Pandas Dataframe containing the data
     :return: prediction_results: a list of boolean values for each datapoint a prediction
@@ -177,144 +191,34 @@ def serving_a_model(data):
     return complete_pipeline.predict(data)
 
 
-def monitor_the_model():
+def monitor_the_model(data):
     """
     If data drift occurs in the model we will see in the accuracy of the model (if we also have the true labels)
     declining. But even without the true labels we can also investigate whether the data distribution changes over
-    time.
-    :return:
+    time. More information on model monitoring [here](https://www.evidentlyai.com/ml-in-production/model-monitoring).
+    :return: Testsuite object from evidently from which data drift on a specific column is investigated.
     """
-    return 0
+    data_drift_column_tests = TestSuite(tests=[TestColumnDrift(column_name="gender", stattest="psi")])
 
-
-def convert_to_standard_dataset_for_aif360(df, target_label_name, scores_name=""):
-    protected_attributes = []
-
-    # columns from the dataset that we want to select for this Bias study
-    selected_features = ["gender", "age"]
-
-    privileged_classes = [[]]
-
-    favorable_target_label = [1]
-
-    # List of column names in the DataFrame which are to be expanded into one-hot vectors.
-    categorical_features = ["gender", "nationality", "sport", "ind-degree", "company"]
-
-    # create the `StandardDataset` object
-    standard_dataset = StandardDataset(
-        df=df,
-        label_name=target_label_name,
-        favorable_classes=favorable_target_label,
-        scores_name=scores_name,
-        protected_attribute_names=protected_attributes,
-        privileged_classes=privileged_classes,
-        categorical_features=categorical_features,
-        features_to_keep=selected_features,
-    )
-    if scores_name == "":
-        standard_dataset.scores = standard_dataset.labels.copy()
-
-    return standard_dataset
+    data_drift_column_tests.run(reference_data=data[:100], current_data=data[100:])
+    return data_drift_column_tests.json()
 
 
 def main() -> int:
     data = exploratory_data_analysis()
-    preprocessor_pipeline, preprocessed_data = preprocessing_data(data)
-    training_model(preprocessor_pipeline, preprocessed_data, data["decision"], exploratory_model_analysis=False)
-    serving_a_model(data)
-
-    # # models = exp.compare_models(include=['lr', 'dt', 'knn', 'catboost'])
-    # models = exp.compare_models()
-    #
-    # # dt = exp.create_model('dt')
-    # # catboost = exp.create_model('catboost')
-    #
-    # # 3. Evaluating models
-    # # Experiment Tracking met mlflow (potentieel ook dataset tracking, maar voor nu doen we dat nog niet?)
-    #
-    # # save model
-    # # exp.save_model(catboost, 'catboost_pipeline')
-    # catboost = exp.load_model('catboost_pipeline')
-    #
-    # # 3.1 evaluating fairness-related metrics
-    # # y_pred = exp.predict_model(catboost, data=unseen_data).loc[:, "prediction_label"]
-    # y_pred = exp.predict_model(catboost, data=unseen_data)
-    # y_true = unseen_data.loc[:, "decision"]
-    # gender = unseen_data.loc[:, "gender"]
-    # # dp = demographic_parity_difference(y_true=y_true, y_pred=y_pred, sensitive_features=gender)
-    # # print(dp)
-    # # dp = demographic_parity_ratio(y_true=y_true, y_pred=y_pred, sensitive_features=gender)
-    # # Deze geeft een ratio van 0.67 aan wat betekent dat er vaker males worden geselecteerd dan females door het model
-    # # mfx = MetricFrame(metrics=accuracy_score, y_true=y_true, y_pred=y_pred, sensitive_features=gender)
-    # # sr = MetricFrame(metrics=selection_rate, y_true=y_true, y_pred=y_pred, sensitive_features=gender)
-    # # print(dp)
-    # # print(sr.by_group)
-    #
-    # # ## check fairness out of the box of pycaret
-    # # catboost_fairness = exp.check_fairness(catboost, sensitive_features=['gender'])
-    # # print(catboost_fairness)
-    #
-    # ## check mitigation of demographic disparity of gender via fairlearn
-    # # constraint = DemographicParity()
-    # # mitigator = ExponentiatedGradient(catboost, constraint)
-    # # exp.traiN_model
-    # X_train_transformed = exp.get_config(variable="X_train_transformed")
-    # train_gender_transformed = exp.get_config(variable="X_train_transformed").loc[:, ["gender_female", "gender_male", "gender_other"]]
-    # y_train_transformed = exp.get_config(variable="y_train_transformed")
-    # # mitigator.fit(X_train_transformed, y_train_transformed, sensitive_features=train_gender_transformed)
-    # # y_pred_mitigated = mitigator.predict(unseen_data)
-    # # sr_mitigated = MetricFrame(metrics=selection_rate, y_true=y_true, y_pred=y_pred_mitigated, sensitive_features=test_gender)
-    # # print(sr_mitigated.overall)
-    # # print(sr_mitigated.by_group)
-    # #
-    #
-    #
-    # ## plotting of the fairness metrics w.r.t. gender
-    # # metrics = {
-    # #     "accuracy": accuracy_score,
-    # #     "precision": precision_score,
-    # #     "false positive rate": false_positive_rate,
-    # #     "false negative rate": false_negative_rate,
-    # #     "selection rate": selection_rate,
-    # #     "count": count,
-    # # }
-    # # metric_frame = MetricFrame(
-    # #     metrics=metrics, y_true=y_true, y_pred=y_pred, sensitive_features=gender
-    # # )
-    # # fig = metric_frame.by_group.plot.bar(
-    # #     subplots=True,
-    # #     layout=[3, 3],
-    # #     legend=False,
-    # #     figsize=[12, 8],
-    # #     title="Show all metrics",
-    # # )
-    # # fig[0][0].figure.savefig("bias.png")
-    # # print(unseen_data.loc[unseen_data['gender'] == 'other'])
-    #
-    # # 4. Analysis & Interpretability
-    # # exp.plot_model(catboost, plot='confusion_matrix')
-    # # exp.plot_model(catboost, plot='auc')
-    # exp.plot_model(catboost, plot='feature', save=True)
-    #
-    # # 4. Serving a result
-    #
-    # # 5. Monitoring
-    # pred_dataset = exp.predict_model(catboost, data=unseen_data)
-    # X_train_transformed = exp.get_config(variable="X_train_transformed")
-    # print(X_train_transformed.columns)
-    # print(pred_dataset.columns)
-    ### TESTING WITH AIF360 packages
-
-    # Metric for the original dataset
-    # standard_dataset_pred_aif360 = convert_to_standard_dataset_for_aif360(exp.predict_model(catboost, data=unseen_data),
-    #                                                        target_label_name='prediction_label',
-    #                                                        scores_name='prediction_score')
-    # # metric_orig_train = BinaryLabelDatasetMetric(X_train_transformed,
-    # #                                              unprivileged_groups=[{'Gender': 'other'}],
-    # #                                              privileged_groups=[{'Gender': 'male'}])
-    # print(metric_orig_train)
-
-    # bias mitigating results
+    train_data = data.sample(frac=0.8)
+    evaluate_data = data.drop(train_data.index)
+    preprocessor_pipeline, preprocessed_data = preprocessing_data(data=train_data)
+    training_model(
+        preprocessing_pipeline=preprocessor_pipeline,
+        x_data=preprocessed_data,
+        y_data=train_data["decision"],
+        raw_data=train_data,
+        exploratory_model_analysis=False,
+    )
+    evaluating_model(data=evaluate_data)
+    serving_a_model(data=evaluate_data[0:10])
+    monitor_the_model(data=evaluate_data)
     return 0
 
 
