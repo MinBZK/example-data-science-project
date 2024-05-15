@@ -17,6 +17,8 @@ mlflow = "^2.12.1"
 fairlearn = "^0.10.0"
 matplotlib = "3.7.5"
 aif360 = "^0.6.1"
+evidently = "^0.4.22"
+isort = "^5.13.2"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.2.0"
