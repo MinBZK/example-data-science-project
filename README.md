@@ -20,7 +20,10 @@ This is a template repository that can be used for Python 3.11 projects and uses
 
 When creating a new Repository select this template repository as the base.
 
-After the repository is created make sure to change the following (we may need to consider copier to automate this):
+## Kaggle
+
+Before you can use this project you need a [kaggle](https://www.kaggle.com/) account and create a token. You
+can store the token in ~/.kaggle/kaggle.json
 
 * change the owners in the the .github/CODEOWNERS
 * run a global rename command where you rename new_name to your project name
