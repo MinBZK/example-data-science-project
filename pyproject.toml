@@ -6,7 +6,7 @@ authors = ["ai-validation-team <ai-validation@minibzk.nl>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.13"
+python = ">=3.11,<3.12"
 kaleido = "0.2.1"
 pycaret = "^3.3.2"
 pandas = "2.1.4"

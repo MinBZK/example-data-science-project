@@ -29,15 +29,9 @@ very quickly check a bunch of models and in which direction to build the "produc
 model, `scikitlearn` is used to generate a not deep machine learning model. For the analysis on fairness and mitigation
 of bias both `FairLearn` and `AIF360` are used. Possible extensitons are:
 
-<<<<<<< HEAD
 - For the analysis on data drift for the monitoring of the model `evidentlyai`, now just a very small part has been used
 
 - For experiment tracking and logging with `MLflow`.
-=======
-- For the analysis on data drift for the monitoring of the model `evidentlyai`
-
-- For experiment tracking with `MLflow`.
->>>>>>> 9b26756 (Better structure of the project)
 
 This repository is inspired by the
 [Thesis of Guusje Juijn](https://studenttheses.uu.nl/bitstream/handle/20.500.12932/43868/Thesis%20Guusje%20Final%20Version.pdf?sequence=1&isAllowed=y)
