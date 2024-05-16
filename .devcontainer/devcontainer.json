@@ -7,7 +7,13 @@
     "POETRY_VIRTUALENVS_CREATE": "false"
   },
   "remoteUser": "root",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
   "postCreateCommand": ".devcontainer/postCreateCommand.sh",
+  "mounts": [
+    "source=${localEnv:HOME}/.kaggle/kaggle.json,target=/root/.kaggle/kaggle.json,type=bind,consistency=cached"
+  ],
   "customizations": {
     "vscode": {
       "extensions": [
@@ -16,7 +22,9 @@
         "streetsidesoftware.code-spell-checker",
         "redhat.vscode-yaml",
         "charliermarsh.ruff",
-        "github.vscode-github-actions"
+        "github.vscode-github-actions",
+        "mhutchie.git-graph",
+        "ms-vsliveshare.vsliveshare"
       ],
       "settings": {
         "editor.formatOnPaste": false,
