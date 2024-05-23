@@ -1,4 +1,7 @@
 import sys
+from pathlib import Path
+from typing import Any
+
 import joblib
 import lightgbm as lgb
 import numpy as np
@@ -16,51 +19,30 @@ from data.download_dataset import download_from_kaggle
 np.random.seed(69)
 
 
-def exploratory_data_analysis():
+def exploratory_data_analysis(workdir: Path = Path("./data")) -> pd.DataFrame:
     """
     This function will do the exploratory data analysis (EDA) on the recruitment dataset of the University of Utrecht.
-    In most projects this is done in a Jupyter Notebook as this makes interaction easier, but a slice of the EDA is
-    still implementated to give you an idea.
+    In most project this is done in a Jupyter Notebook as this makes interaction easier, but a slice of the EDA is still
+    implementated to give you an idea.
     :return: pd.Dataframe containing the data
     """
-    datapath = "./data/recruitmentdataset-2022-1.3.csv"
+    datapath: Path = workdir / "recruitmentdataset-2022-1.3.csv"
     download_from_kaggle(datapath)
 
-    df = pd.read_csv(datapath, index_col="Id")
+    df: pd.DataFrame = pd.read_csv(datapath, index_col="Id")
 
     df.head()  # The data is about whether based on some characteristic people are hired or not
-    df.shape  # There are 4000 datapoints with 13 feature columns and 1 label column
     df[df.duplicated()]  # There are 39 duplicate values, but this is to be expected based on the categorical features
     df.isna().sum()  # There are no missing values
     df.describe()  # There are just 3 numerical features, which are the age, university grade, and languages.
-    cat_cols = [
-        "gender",
-        "nationality",
-        "sport",
-        "ind-debateclub",
-        "ind-programming_exp",
-        "ind-international_exp",
-        "ind-entrepeneur_exp",
-        "ind-exact_study",
-        "company",
-        "decision",
-    ]
 
-    # TODO: Bias across different companies
-    # TODO: Say something about distribution of the target variable
-    # TODO: plots of target variable to the sensitive features
-    # TODO: Better explanation of splitting of the dataset
-
-    for col in cat_cols:
-        categories = df.groupby(col).size()
-        # print(categories)
     # From the categorical features we see that the non-binary gender is underrepresented although it is from the true
     # distribution of society at this moment. The same holds for nationality where Dutch is overrepresented. almost 3/4
     # of the applicants got rejected which we need to take into account in our model as well.
     return df
 
 
-def preprocessing_data(data: pd.DataFrame) -> (Pipeline, pd.DataFrame):
+def preprocessing_data(data: pd.DataFrame) -> tuple[ColumnTransformer, pd.DataFrame]:
     """
     Preprocessing of the dataset, on the one hand for the AIF360 we need to parse the dataset to a StandardDataset
     which is an object needed to be able to use the features of AIF360. Also for the machine learning models it is very
@@ -92,8 +74,7 @@ def preprocessing_data(data: pd.DataFrame) -> (Pipeline, pd.DataFrame):
         ],
         verbose_feature_names_out=False,
     )
-    preprocessor_pipeline.set_output(transform="pandas")
-    preprocessed_data = preprocessor_pipeline.fit_transform(data)
+    preprocessed_data: Any = preprocessor_pipeline.fit_transform(data)
     return preprocessor_pipeline, preprocessed_data
 
 
@@ -103,6 +84,7 @@ def training_model(
     y_data: pd.DataFrame,
     raw_data: pd.DataFrame,
     exploratory_model_analysis: bool = False,
+    workdir: Path = Path("./data"),
 ) -> int:
     """
     This function will train a model on the dataframe provided
@@ -131,7 +113,6 @@ def training_model(
 
     ## Cross validation
     # potential improvement to use a cross validation instead of fit (to overcome overfitting) like
-    from sklearn.model_selection import RandomizedSearchCV
 
     # param_dist = {
     #     'classifier__bagging_fraction': (0.5, 0.8),
@@ -156,7 +137,10 @@ def training_model(
     # exponentiated_gradient.fit(raw_data, y_data, sensitive_features=raw_data["gender"])
     # complete_pipeline = exponentiated_gradient
 
-    joblib.dump(complete_pipeline, "./data/model/recruitment_lightgbm_model.pkl")
+    modeldir = workdir / "model"
+    modeldir.mkdir(parents=True, exist_ok=True)
+
+    joblib.dump(complete_pipeline, modeldir / "recruitment_lightgbm_model.pkl")
     return 0
 
 
@@ -169,20 +153,20 @@ def evaluating_model(data: pd.DataFrame) -> int:
     :param data: The data to look at the bias metrics to
     :return: 0
     """
-    y_pred = serving_a_model(data)
-    y_true = data.loc[:, "decision"]
-    gender = data.loc[:, "gender"]
-    dp = demographic_parity_difference(y_true=y_true, y_pred=y_pred, sensitive_features=gender)
-    sr = MetricFrame(metrics=selection_rate, y_true=y_true, y_pred=y_pred, sensitive_features=gender)
+    y_pred: list[object] = serving_a_model(data)
+    y_true: pd.Series[bool] = data.loc[:, "decision"]
+    gender: pd.Series[Any] = data.loc[:, "gender"]  # Specify the type of "gender" as a pandas Series
+    demographic_parity_difference(y_true=y_true, y_pred=y_pred, sensitive_features=gender)
+    MetricFrame(metrics=selection_rate, y_true=y_true, y_pred=y_pred, sensitive_features=gender)
     # print(dp)
     # print(sr.by_group)
-    # The difference in demographic parity is 0.25, this means that there is a 25% difference between the amount of
+    # The difference in demographic parirty is 0.25, this means that there is a 25% difference between the amount of
     # times that the 'lowest' gender gets selected compared to the highest. In this case that is between 'female' and
     # 'other'. This gives us reason to mitigate this bias for gender in the original model.
     return 0
 
 
-def serving_a_model(data: pd.DataFrame) -> list:
+def serving_a_model(data: pd.DataFrame, workdir: Path = Path("./data")) -> list[object]:
     """
     This function will 'serve' the model, normally when serving a model one would include the preprocessing steps also
     within the model/pipeline. Therefore, this way of passing just the classifier and the preprocessed data would not
@@ -191,11 +175,11 @@ def serving_a_model(data: pd.DataFrame) -> list:
     :param data: Pandas Dataframe containing the data
     :return: prediction_results: a list of boolean values for each datapoint a prediction
     """
-    complete_pipeline = joblib.load("./data/model/recruitment_lightgbm_model.pkl")
+    complete_pipeline = joblib.load(workdir / "model/recruitment_lightgbm_model.pkl")
     return complete_pipeline.predict(data)
 
 
-def monitor_the_model(data):
+def monitor_the_model(data: pd.DataFrame):
     """
     If data drift occurs in the model we will see in the accuracy of the model (if we also have the true labels)
     declining. But even without the true labels we can also investigate whether the data distribution changes over
@@ -209,20 +193,23 @@ def monitor_the_model(data):
 
 
 def main() -> int:
-    data = exploratory_data_analysis()
+    workdir: Path = Path("./data")
+    data = exploratory_data_analysis(workdir)
     train_data = data.sample(frac=0.8)
     evaluate_data = data.drop(train_data.index)
     preprocessor_pipeline, preprocessed_data = preprocessing_data(data=train_data)
     training_model(
-        preprocessing_pipeline=preprocessor_pipeline,
+        preprocessing_pipeline=preprocessor_pipeline,  # type: ignore
         x_data=preprocessed_data,
-        y_data=train_data["decision"],
+        y_data=train_data["decision"],  # type: ignore
         raw_data=train_data,
         exploratory_model_analysis=False,
+        workdir=workdir,
     )
     evaluating_model(data=evaluate_data)
     serving_a_model(data=evaluate_data[0:10])
     monitor_the_model(data=evaluate_data)
+    return 0
 
 
 if __name__ == "__main__":  # pragma: no cover
