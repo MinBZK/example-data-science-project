@@ -22,8 +22,8 @@ np.random.seed(69)
 def exploratory_data_analysis(workdir: Path = Path("./data")) -> pd.DataFrame:
     """
     This function will do the exploratory data analysis (EDA) on the recruitment dataset of the University of Utrecht.
-    In most project this is done in a Jupyter Notebook as this makes interaction easier, but a slice of the EDA is still
-    implementated to give you an idea.
+    In most projects this is done in a Jupyter Notebook as this makes interaction easier, but a slice of the EDA is
+    still implemented to give you an idea.
     :return: pd.Dataframe containing the data
     """
     datapath: Path = workdir / "recruitmentdataset-2022-1.3.csv"

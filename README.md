@@ -14,13 +14,16 @@ The typical steps will be done:
 4. serving a result
 5. monitoring
 
+Because building an algorithm is not linear and if unwanted behaviour is seen in any step of the progress it could be
+that you are returning to previous steps in the process. Because of this process, it is hard to define this in this
+project. Therefore, I have chosen comment out the chain-of-thought that one could have in order to f.e. mitigate bias
+or choosing a specific model. So when running `__main__.py` does not result in any output as it will make a model and
+does inference on it without anything to return.
+
 ## Kaggle
 
 Before you can use this project you need a [kaggle](https://www.kaggle.com/) account and create a token. You
 can store the token in ~/.kaggle/kaggle.json
-
-The steps does not follow a linear path, but actually loops back whenever one notices models do not have wanted
-features.
 
 ## Tools used
 
