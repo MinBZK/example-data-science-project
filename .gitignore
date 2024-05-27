@@ -3,7 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-
 # Unit test / coverage reports
 .coverage
 .coverage.*
@@ -15,6 +14,7 @@ __pypackages__/
 
 # Environments
 .venv
+.python-version
 
 # pytest
 .pytest_cache/
@@ -22,6 +22,12 @@ __pypackages__/
 # ruff linter
 .ruff_cache/
 
+# PyCharm config
+.idea
 
+# Data files
+*.csv
+*.pkl
 
-
+# log files
+*.log
