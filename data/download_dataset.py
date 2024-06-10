@@ -1,5 +1,6 @@
-import kaggle
 import os.path
+
+import kaggle
 
 
 def download_from_kaggle(datapath):
