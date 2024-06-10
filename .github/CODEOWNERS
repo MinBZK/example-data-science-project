@@ -1,4 +1,7 @@
 * @MinBZK/ai-validation-team
-
+# excluded files so github actions bot can auto update dependencies
+# https://github.com/orgs/community/discussions/23064
 poetry.lock
 pyproject.toml
+.github/workflows/*
+.devcontainer/devcontainer.json
