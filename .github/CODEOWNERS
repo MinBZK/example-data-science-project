@@ -1,1 +1,4 @@
 * @MinBZK/ai-validation-team
+
+poetry.lock  @MinBZK/ai-validation-team github-actions[bot]
+pyproject.toml @MinBZK/ai-validation-team github-actions[bot]
