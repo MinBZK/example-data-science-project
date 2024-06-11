@@ -57,6 +57,8 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - name: Get branch name
-        run: echo "Github ref = ${{ github.ref }}"
+      - name: Get head ref
+        run: echo "Github github.head_ref = ${{ github.head_ref }}"
+      - name: Get ref name
+        run: echo "Github github.eef_name = ${{ github.ref_name }}"
 # this is a line so we can trigger a PR
