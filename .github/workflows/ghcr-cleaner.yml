@@ -1,0 +1,26 @@
+name: Github Container Registry Cleaner
+on:
+  schedule:
+    - cron: "0 4 * * Sun"
+
+jobs:
+  delete_old_images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete untagged images
+        uses: dataaxiom/ghcr-cleanup-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Delete older tagged images
+        uses: dataaxiom/ghcr-cleanup-action@v1
+        with:
+          tags: main, latest, v*.*.*
+          keep-n-tagged: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Delete tagged images for pull requests
+        uses: dataaxiom/ghcr-cleanup-action@v1
+        with:
+          tags: pr*
+          token: ${{ secrets.GITHUB_TOKEN }}
