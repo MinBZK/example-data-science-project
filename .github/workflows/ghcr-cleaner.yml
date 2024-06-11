@@ -15,6 +15,7 @@ jobs:
           image-names: data-science-1
           cut-off: One hour ago UTC
           keep-at-least: 1
+          filter-tags: latest, v*.*.*
           token: ${{ secrets.GITHUB_TOKEN }}
           token-type: github-token
       - name: Delete old images
@@ -22,6 +23,7 @@ jobs:
         with:
           image-names: data-science-0
           cut-off: One hour ago UTC
+          skip-tags: latest, v*.*.*
           keep-at-least: 0
           token: ${{ secrets.GITHUB_TOKEN }}
           token-type: github-token
