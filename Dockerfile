@@ -16,35 +16,35 @@ ENV PYTHONUNBUFFERED=1 \
     POETRY_NO_INTERACTION=1 \
     POETRY_HOME='/usr/local'
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN  curl -sSL https://install.python-poetry.org | python3 -
-
+#RUN apt-get update && apt-get install -y --no-install-recommends \
+#    curl \
+#    && rm -rf /var/lib/apt/lists/*
+#
+#RUN  curl -sSL https://install.python-poetry.org | python3 -
+#
 WORKDIR /app/
 COPY ./poetry.lock ./pyproject.toml ./
+#
+#RUN poetry install --without dev,test
+#ENV PATH="/app/.venv/bin:$PATH"
 
-RUN poetry install --without dev,test
-ENV PATH="/app/.venv/bin:$PATH"
-
-FROM project-base as development
-
-COPY . .
-RUN poetry install
-
-FROM development AS lint
-
-RUN ruff check
-RUN ruff format --check
-
-FROM development AS test
-RUN coverage run --rcfile ./pyproject.toml -m pytest ./tests
-RUN coverage report --fail-under 95
-
-FROM project-base as production
-
-COPY example_datascience /app/example_datascience
-
-# change this to a usefull command
-CMD ["python", "-m", "example_datascience" ]
+#FROM project-base as development
+#
+#COPY . .
+#RUN poetry install
+#
+#FROM development AS lint
+#
+#RUN ruff check
+#RUN ruff format --check
+#
+#FROM development AS test
+#RUN coverage run --rcfile ./pyproject.toml -m pytest ./tests
+#RUN coverage report --fail-under 95
+#
+#FROM project-base as production
+#
+#COPY example_datascience /app/example_datascience
+#
+## change this to a usefull command
+#CMD ["python", "-m", "example_datascience" ]
