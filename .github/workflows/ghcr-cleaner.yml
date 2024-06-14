@@ -12,15 +12,16 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Delete older tagged images
+      - name: 'Clean up development images'
         uses: dataaxiom/ghcr-cleanup-action@v1
         with:
-          tags: main, latest, v*.*.*
-          keep-n-tagged: 1
+          keep-n-tagged: 10
+          exclude-tags: '*release*,*main*,*latest*'
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Delete tagged images for pull requests
+      - name: 'Clean up images from main'
         uses: dataaxiom/ghcr-cleanup-action@v1
         with:
-          tags: pr*
+          keep-n-tagged: 5
+          tags: '*main*'
           token: ${{ secrets.GITHUB_TOKEN }}
