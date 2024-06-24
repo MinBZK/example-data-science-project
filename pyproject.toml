@@ -23,7 +23,7 @@ ruff = "0.4.9"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.2.2"
-coverage = "^7.5.3"
+coverage = "^7.5.4"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.4.9"
