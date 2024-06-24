@@ -727,13 +727,13 @@ yaml = ["ruamel.yaml"]
 
 [[package]]
 name = "evidently"
-version = "0.4.27"
+version = "0.4.28"
 description = "Open-source tools to analyze, monitor, and debug machine learning model in production."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "evidently-0.4.27-py3-none-any.whl", hash = "sha256:b0fc5362a44ff6930d5f67d4d97f462b03090cc0ede62e57b326b172f4ec2c79"},
-    {file = "evidently-0.4.27.tar.gz", hash = "sha256:b4bcc64de351fa76662f5ebe59a4929c94942daffb1bf228a8ac501286d203a4"},
+    {file = "evidently-0.4.28-py3-none-any.whl", hash = "sha256:35099a0c360088128bf40fb3bf951adae74ef082776fea2ad0da1f85caa59a11"},
+    {file = "evidently-0.4.28.tar.gz", hash = "sha256:cad0bda78ee63abdc978998d3c03f7d8fe8a5357d7575b840465543f7e40fd62"},
 ]
 
 [package.dependencies]
@@ -756,9 +756,9 @@ statsmodels = ">=0.12.2"
 typer = ">=0.3"
 typing-inspect = ">=0.9.0"
 ujson = ">=5.4.0"
-urllib3 = ">=1.26.18"
+urllib3 = ">=1.26.19"
 uvicorn = {version = ">=0.22.0", extras = ["standard"]}
-watchdog = ">=3"
+watchdog = ">=3.0.0"
 
 [package.extras]
 dev = ["httpx (==0.24.1)", "jupyter (==1.0.0)", "mypy (==0.981)", "pillow (==10.3.0)", "pip-audit (>=2.7.2)", "pre-commit (==3.5.0)", "pytest (==7.4.4)", "ruff (==0.3.7)", "setuptools (==65.5.1)", "setuptools (==68.2.2)", "types-PyYAML (==6.0.1)", "types-dataclasses (==0.6)", "types-python-dateutil (==2.8.19)", "types-requests (==2.26.0)", "types-ujson (>=5.4.0)", "wheel (==0.38.1)"]
@@ -4524,4 +4524,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.12"
-content-hash = "b5ad8f34fe7c7fb23762e4192feb886d8e0286a001d874361e002748b5d48d9d"
+content-hash = "e1d54c602f9fa367547217d05651b39fc000df5aa2b75bd8b65dc06213ffce7d"
