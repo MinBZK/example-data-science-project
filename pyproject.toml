@@ -28,7 +28,7 @@ coverage = "^7.6.0"
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.5.4"
 pre-commit = "^3.7.0"
-pyright = "^1.1.371"
+pyright = "^1.1.372"
 
 [build-system]
 requires = ["poetry-core"]
