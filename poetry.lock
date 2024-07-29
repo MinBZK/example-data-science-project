@@ -1482,12 +1482,12 @@ files = [
 
 [[package]]
 name = "kaggle"
-version = "1.6.14"
+version = "1.6.17"
 description = "Kaggle API"
 optional = false
 python-versions = "*"
 files = [
-    {file = "kaggle-1.6.14.tar.gz", hash = "sha256:583532bdeca3c9e0cafc4931112c6737b5e68f187ab59ee77dffdf09fdf9dbd9"},
+    {file = "kaggle-1.6.17.tar.gz", hash = "sha256:439a7dea1d5039f320fd6ad5ec21b688dcfa70d405cb42095b81f41edc401b81"},
 ]
 
 [package.dependencies]
@@ -4847,4 +4847,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.12"
-content-hash = "22b86781907a2bf552a2f32286b79bda2afc4feadf4f980d1ce1a64f6cf70b39"
+content-hash = "183f5dd64005891ab9ec83bee3dc51ab6dee7bf59d311a6a9d26d4ca946c7619"
