@@ -19,14 +19,14 @@ aif360 = "^0.6.1"
 evidently = "^0.4.36"
 isort = "^5.13.2"
 pre-commit = "3.8.0"
-ruff = "0.6.2"
+ruff = "0.6.3"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.3.2"
 coverage = "^7.6.1"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.6.2"
+ruff = "^0.6.3"
 pre-commit = "^3.8.0"
 pyright = "^1.1.377"
 
