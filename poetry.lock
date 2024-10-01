@@ -875,13 +875,13 @@ yaml = ["ruamel.yaml"]
 
 [[package]]
 name = "evidently"
-version = "0.4.37"
+version = "0.4.38"
 description = "Open-source tools to analyze, monitor, and debug machine learning model in production."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "evidently-0.4.37-py3-none-any.whl", hash = "sha256:05296a1e1a2953164bb1e0eca8bce6207ddc69e974902165b1c8e0eead710b0b"},
-    {file = "evidently-0.4.37.tar.gz", hash = "sha256:8d04f956097e29bf1478cb64346ee2e0781a824d0bddae1d84f3276df78dff2e"},
+    {file = "evidently-0.4.38-py3-none-any.whl", hash = "sha256:e70e5a512f2d65663be8da93ebec4341b44093eb11580f6b03b8d1cbdd3b9f3f"},
+    {file = "evidently-0.4.38.tar.gz", hash = "sha256:9b719a485ed3db4f64e197d1fe86d4e557626ff14737ea9f31801b29d9fa0127"},
 ]
 
 [package.dependencies]
@@ -907,6 +907,7 @@ typer = ">=0.3"
 typing-inspect = ">=0.9.0"
 ujson = ">=5.4.0"
 urllib3 = ">=1.26.19"
+uuid6 = ">=2024.7.10"
 uvicorn = {version = ">=0.22.0", extras = ["standard"]}
 watchdog = ">=3.0.0"
 
@@ -4157,6 +4158,17 @@ socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
+name = "uuid6"
+version = "2024.7.10"
+description = "New time-based UUID formats which are suited for use as a database key"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "uuid6-2024.7.10-py3-none-any.whl", hash = "sha256:93432c00ba403751f722829ad21759ff9db051dea140bf81493271e8e4dd18b7"},
+    {file = "uuid6-2024.7.10.tar.gz", hash = "sha256:2d29d7f63f593caaeea0e0d0dd0ad8129c9c663b29e19bdf882e864bedf18fb0"},
+]
+
+[[package]]
 name = "uvicorn"
 version = "0.30.1"
 description = "The lightning-fast ASGI server."
@@ -4701,4 +4713,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.12"
-content-hash = "efb9889f5058344bb26dde2319a15e6c4f7334e3643ebb05f01450e8ad57d266"
+content-hash = "f41d05fe08316255a80f8d4cf4607cb1405535bce0062f8f9e6cfab28717b3f6"
