@@ -923,13 +923,13 @@ tests = ["asttokens (>=2.1.0)", "coverage", "coverage-enable-subprocess", "ipyth
 
 [[package]]
 name = "fairlearn"
-version = "0.10.0"
+version = "0.11.0"
 description = "A Python package to assess and improve fairness of machine learning models."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "fairlearn-0.10.0-py3-none-any.whl", hash = "sha256:772224097f8c073168bde44e659d7a2107f96d608063a738df9c985e17dab30f"},
-    {file = "fairlearn-0.10.0.tar.gz", hash = "sha256:70e7aefaf9cb16e00462624d58b0517397970dc40d4cbc71e8d40f7c69800f9d"},
+    {file = "fairlearn-0.11.0-py3-none-any.whl", hash = "sha256:c8592e54412bd612a6a9823d177c9eab9212582c22ca01723739362971fcc266"},
+    {file = "fairlearn-0.11.0.tar.gz", hash = "sha256:d836b851dd33c4d27bb07ab01b5f84b90d52b716c5bade54731656073c47f445"},
 ]
 
 [package.dependencies]
@@ -4703,4 +4703,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.12"
-content-hash = "9a39c624303651268139ef1a1e994e7cb82fbfdbd6536a0f4af4e0280e6d3c74"
+content-hash = "966a26e215ea97af5fdbe87e2ee3f1f78c55a3bae9450b883c2a0bc9bc30b910"
