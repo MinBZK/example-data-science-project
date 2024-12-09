@@ -865,13 +865,13 @@ yaml = ["ruamel.yaml"]
 
 [[package]]
 name = "evidently"
-version = "0.4.40"
+version = "0.5.0"
 description = "Open-source tools to analyze, monitor, and debug machine learning model in production."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "evidently-0.4.40-py3-none-any.whl", hash = "sha256:a19221b10dc3193ad96cd8ba18ebe015eeb96f62fdf450f584cd0d2ede358f5d"},
-    {file = "evidently-0.4.40.tar.gz", hash = "sha256:590cdc0eb6d6e4f3b42db5509562f15a04193e23a7c86252422b109057fb341b"},
+    {file = "evidently-0.5.0-py3-none-any.whl", hash = "sha256:57da6f1cafcc4b1002da4e22b7d791a15179bdc0821726052982c4547daef91d"},
+    {file = "evidently-0.5.0.tar.gz", hash = "sha256:9c51703a0681c68fe73959c408c9d2f2f06408252dd46d6ff03b318d084c66ac"},
 ]
 
 [package.dependencies]
@@ -904,7 +904,7 @@ watchdog = ">=3.0.0"
 [package.extras]
 dev = ["httpx (==0.27.0)", "jupyter (==1.0.0)", "mypy (==1.1.1)", "pandas-stubs (>=1.3.5)", "pillow (==10.3.0)", "pip-audit (>=2.7.2)", "pre-commit (==3.5.0)", "pytest (==7.4.4)", "pytest-asyncio (==0.23.7)", "ruff (==0.3.7)", "setuptools (==65.5.1)", "setuptools (==68.2.2)", "types-PyYAML (==6.0.1)", "types-dataclasses (==0.6)", "types-python-dateutil (==2.8.19)", "types-requests (==2.26.0)", "types-ujson (>=5.4.0)", "wheel (==0.38.1)"]
 fsspec = ["gcsfs (>=2024.9.0)", "s3fs (>=2024.9.0)"]
-llm = ["chromadb (>=0.4.0)", "evaluate (>=0.4.1)", "openai (>=1.16.2)", "sentence-transformers (>=2.7.0)", "transformers[torch] (>=4.39.3)"]
+llm = ["chromadb (>=0.4.0)", "evaluate (>=0.4.1)", "openai (>=1.16.2)", "sentence-transformers (>=2.7.0)", "sqlvalidator (>=0.0.20)", "transformers[torch] (>=4.39.3)"]
 spark = ["pyspark (>=3.4.0)"]
 
 [[package]]
@@ -4708,4 +4708,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.12"
-content-hash = "aae90975a34aa48f869be6b0e7a3a280352784281286ac67cc136c9bf1340864"
+content-hash = "5b2190b0161f98d532bc0221a97ebf004d27610e4a416cc01bd8639046459bab"
