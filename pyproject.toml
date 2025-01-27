@@ -18,7 +18,7 @@ matplotlib = "3.7.5"
 aif360 = "^0.6.1"
 evidently = "^0.5.1"
 isort = "^5.13.2"
-pre-commit = "4.0.1"
+pre-commit = "4.1.0"
 ruff = "0.9.1"
 
 [tool.poetry.group.test.dependencies]
@@ -27,7 +27,7 @@ coverage = "^7.6.10"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.9.1"
-pre-commit = "^4.0.1"
+pre-commit = "^4.1.0"
 pyright = "^1.1.392"
 
 [build-system]
