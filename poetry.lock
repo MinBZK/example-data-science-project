@@ -865,13 +865,13 @@ yaml = ["ruamel.yaml"]
 
 [[package]]
 name = "evidently"
-version = "0.5.1"
+version = "0.6.4"
 description = "Open-source tools to analyze, monitor, and debug machine learning model in production."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "evidently-0.5.1-py3-none-any.whl", hash = "sha256:b922d72b4adee1400ad5d1b60dc1528478f5d4559eaa894fbb835079541fc825"},
-    {file = "evidently-0.5.1.tar.gz", hash = "sha256:7a90c87b60e6b7112da5768905c4fe369ac534d7acdb41a754c63da540eda925"},
+    {file = "evidently-0.6.4-py3-none-any.whl", hash = "sha256:eab64cabae5b826cb93f48883d0d6f635703f429b9fdde6fc5d972b884344235"},
+    {file = "evidently-0.6.4.tar.gz", hash = "sha256:a59c5bcc8894d26c8507f428f1ae6f3c10a15615a8455fcfeac22db3031a5961"},
 ]
 
 [package.dependencies]
@@ -885,12 +885,12 @@ litestar = ">=2.8.3"
 nltk = ">=3.6.7"
 numpy = ">=1.22.0,<2.1"
 pandas = {version = ">=1.3.5", extras = ["parquet"]}
-plotly = ">=5.10.0"
+plotly = ">=5.10.0,<6"
 pydantic = ">=1.10.13"
 PyYAML = ">=5.4"
 requests = ">=2.32.0"
 rich = ">=13"
-scikit-learn = ">=1.0.1,<1.6.0"
+scikit-learn = ">=1.0.1"
 scipy = ">=1.10.0"
 statsmodels = ">=0.12.2"
 typer = ">=0.3"
@@ -904,7 +904,7 @@ watchdog = ">=3.0.0"
 [package.extras]
 dev = ["httpx (==0.27.0)", "jupyter (==1.0.0)", "mypy (==1.1.1)", "pandas-stubs (>=1.3.5)", "pillow (==10.3.0)", "pip-audit (>=2.7.2)", "pre-commit (==3.5.0)", "pytest (==7.4.4)", "pytest-asyncio (==0.23.7)", "ruff (==0.3.7)", "setuptools (==65.5.1)", "setuptools (==68.2.2)", "types-PyYAML (==6.0.1)", "types-dataclasses (==0.6)", "types-python-dateutil (==2.8.19)", "types-requests (==2.26.0)", "types-ujson (>=5.4.0)", "wheel (==0.38.1)"]
 fsspec = ["gcsfs (>=2024.9.0)", "s3fs (>=2024.9.0)"]
-llm = ["chromadb (>=0.4.0)", "evaluate (>=0.4.1)", "openai (>=1.16.2)", "sentence-transformers (>=2.7.0)", "sqlvalidator (>=0.0.20)", "transformers[torch] (>=4.39.3)"]
+llm = ["chromadb (>=0.4.0)", "evaluate (>=0.4.1)", "litellm (>=1.60.4)", "openai (>=1.16.2)", "sentence-transformers (>=2.7.0)", "sqlvalidator (>=0.0.20)", "transformers[torch] (>=4.39.3)"]
 spark = ["pyspark (>=3.4.0)"]
 
 [[package]]
@@ -4708,4 +4708,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.12"
-content-hash = "bcbaad7a532ee91d034418469a9efb79b06c433ad83e3aceacdb207c5e372d8c"
+content-hash = "943b4e76d9bd3a0e305eeac8fb7a66ec14eb6b3a19df9c999d280de4918e62e7"
