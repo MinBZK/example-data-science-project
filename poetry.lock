@@ -866,13 +866,13 @@ yaml = ["ruamel.yaml"]
 
 [[package]]
 name = "evidently"
-version = "0.6.4"
+version = "0.6.5"
 description = "Open-source tools to analyze, monitor, and debug machine learning model in production."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "evidently-0.6.4-py3-none-any.whl", hash = "sha256:eab64cabae5b826cb93f48883d0d6f635703f429b9fdde6fc5d972b884344235"},
-    {file = "evidently-0.6.4.tar.gz", hash = "sha256:a59c5bcc8894d26c8507f428f1ae6f3c10a15615a8455fcfeac22db3031a5961"},
+    {file = "evidently-0.6.5-py3-none-any.whl", hash = "sha256:de2f851b60ad6923e97a8ceec65e8e2829a109f937b8e76a71fd7e36d2afd352"},
+    {file = "evidently-0.6.5.tar.gz", hash = "sha256:1f1851544f9bb6f35e47d3f6338e03264b9134c4743b80ed7b9283d516ac054a"},
 ]
 
 [package.dependencies]
@@ -4722,4 +4722,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.12"
-content-hash = "9a36bd1a8d99f07a0dd1c77362b36aec4d9be44a18eec3d5d47bc1ce770fb3d9"
+content-hash = "df0d3ab3606e83a48fbbc6fd06d7b813528c94bd68e3360ed52975e07a627ba7"
