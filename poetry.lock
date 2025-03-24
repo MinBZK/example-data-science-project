@@ -1592,24 +1592,31 @@ files = [
 
 [[package]]
 name = "kaggle"
-version = "1.6.17"
-description = "Kaggle API"
+version = "1.7.4.2"
+description = "Access Kaggle resources anywhere"
 optional = false
-python-versions = "*"
+python-versions = ">=3.7"
 groups = ["main"]
 files = [
-    {file = "kaggle-1.6.17.tar.gz", hash = "sha256:439a7dea1d5039f320fd6ad5ec21b688dcfa70d405cb42095b81f41edc401b81"},
+    {file = "kaggle-1.7.4.2-py3-none-any.whl", hash = "sha256:f25fec160651e05599b78d9ad3e00958d533172cfad02fcb2d202ac87e65e18e"},
+    {file = "kaggle-1.7.4.2.tar.gz", hash = "sha256:0b144358f4187bde83e8a0335549bf736fb466697272a135a985eb6d2c6f9cb6"},
 ]
 
 [package.dependencies]
 bleach = "*"
-certifi = ">=2023.7.22"
-python-dateutil = "*"
+certifi = ">=14.05.14"
+charset-normalizer = "*"
+idna = "*"
+protobuf = "*"
+python-dateutil = ">=2.5.3"
 python-slugify = "*"
 requests = "*"
+setuptools = ">=21.0.0"
 six = ">=1.10"
+text-unidecode = "*"
 tqdm = "*"
-urllib3 = "*"
+urllib3 = ">=1.15.1"
+webencodings = "*"
 
 [[package]]
 name = "kaleido"
@@ -2830,6 +2837,25 @@ files = [
 
 [package.dependencies]
 wcwidth = "*"
+
+[[package]]
+name = "protobuf"
+version = "6.30.1"
+description = ""
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "protobuf-6.30.1-cp310-abi3-win32.whl", hash = "sha256:ba0706f948d0195f5cac504da156d88174e03218d9364ab40d903788c1903d7e"},
+    {file = "protobuf-6.30.1-cp310-abi3-win_amd64.whl", hash = "sha256:ed484f9ddd47f0f1bf0648806cccdb4fe2fb6b19820f9b79a5adf5dcfd1b8c5f"},
+    {file = "protobuf-6.30.1-cp39-abi3-macosx_10_9_universal2.whl", hash = "sha256:aa4f7dfaed0d840b03d08d14bfdb41348feaee06a828a8c455698234135b4075"},
+    {file = "protobuf-6.30.1-cp39-abi3-manylinux2014_aarch64.whl", hash = "sha256:47cd320b7db63e8c9ac35f5596ea1c1e61491d8a8eb6d8b45edc44760b53a4f6"},
+    {file = "protobuf-6.30.1-cp39-abi3-manylinux2014_x86_64.whl", hash = "sha256:e3083660225fa94748ac2e407f09a899e6a28bf9c0e70c75def8d15706bf85fc"},
+    {file = "protobuf-6.30.1-cp39-cp39-win32.whl", hash = "sha256:554d7e61cce2aa4c63ca27328f757a9f3867bce8ec213bf09096a8d16bcdcb6a"},
+    {file = "protobuf-6.30.1-cp39-cp39-win_amd64.whl", hash = "sha256:b510f55ce60f84dc7febc619b47215b900466e3555ab8cb1ba42deb4496d6cc0"},
+    {file = "protobuf-6.30.1-py3-none-any.whl", hash = "sha256:3c25e51e1359f1f5fa3b298faa6016e650d148f214db2e47671131b9063c53be"},
+    {file = "protobuf-6.30.1.tar.gz", hash = "sha256:535fb4e44d0236893d5cf1263a0f706f1160b689a7ab962e9da8a9ce4050b780"},
+]
 
 [[package]]
 name = "psutil"
@@ -4899,4 +4925,4 @@ test = ["big-O", "importlib-resources ; python_version < \"3.9\"", "jaraco.funct
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<3.12"
-content-hash = "f9a94c0a48ea0118e68a70f407c8a666be115f345028e13a260f6b275487f108"
+content-hash = "a12f86e3bc350ebbdb724a4400f49a9321091dd23dfa57371508291c72da433e"
