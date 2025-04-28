@@ -900,14 +900,14 @@ yaml = ["ruamel.yaml"]
 
 [[package]]
 name = "evidently"
-version = "0.7.0"
+version = "0.7.3"
 description = "Open-source tools to analyze, monitor, and debug machine learning model in production."
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "evidently-0.7.0-py3-none-any.whl", hash = "sha256:2889d3f93509b7f9526a86dc62d714184ecfc1c355e1f5190a48e9d9725b257f"},
-    {file = "evidently-0.7.0.tar.gz", hash = "sha256:0f837f730be6ffdfea6977945878c7f86405cacdd8c8b6b1ad712cf4a13e5db3"},
+    {file = "evidently-0.7.3-py3-none-any.whl", hash = "sha256:86c6663ce537cfbe3b4032612ec1ef3071d07e60437c5ba3553f41caca4ce896"},
+    {file = "evidently-0.7.3.tar.gz", hash = "sha256:a4f7638e91674dca40bcf30853f0705a8fc58a673a212e9e00ed0ee16e5e767a"},
 ]
 
 [package.dependencies]
@@ -919,7 +919,7 @@ fsspec = ">=2024.6.1"
 iterative-telemetry = ">=0.0.5"
 litestar = ">=2.8.3"
 nltk = ">=3.6.7"
-numpy = ">=1.22.0,<2.1"
+numpy = ">=1.22.0"
 pandas = {version = ">=1.3.5", extras = ["parquet"]}
 plotly = ">=5.10.0,<6"
 pydantic = ">=1.10.16"
@@ -938,7 +938,7 @@ uvicorn = {version = ">=0.22.0", extras = ["standard"]}
 watchdog = ">=3.0.0"
 
 [package.extras]
-dev = ["httpx (==0.27.0)", "jupyter (==1.0.0)", "mypy (==1.1.1)", "pandas-stubs (>=1.3.5)", "pillow (==10.3.0)", "pip-audit (>=2.7.2)", "pre-commit (==3.5.0)", "pytest (==7.4.4)", "pytest-asyncio (==0.23.7)", "ruff (==0.3.7)", "setuptools (==65.5.1) ; python_version < \"3.12\"", "setuptools (==68.2.2) ; python_version >= \"3.12\"", "types-PyYAML (==6.0.1)", "types-dataclasses (==0.6)", "types-python-dateutil (==2.8.19)", "types-requests (==2.26.0)", "types-ujson (>=5.4.0)", "wheel (==0.38.1)"]
+dev = ["httpx (==0.27.0)", "jupyter (==1.0.0)", "mypy (==1.1.1)", "pandas-stubs (>=1.3.5)", "pillow (>=10.3.0)", "pip-audit (>=2.7.2)", "pre-commit (==3.5.0)", "pytest (==7.4.4)", "pytest-asyncio (==0.23.7)", "pytest-mock (==3.14.0)", "ruff (==0.3.7)", "setuptools (==65.5.1) ; python_version < \"3.12\"", "setuptools (==68.2.2) ; python_version >= \"3.12\"", "types-PyYAML (==6.0.1)", "types-dataclasses (==0.6)", "types-python-dateutil (==2.8.19)", "types-requests (==2.26.0)", "types-ujson (>=5.4.0)", "wheel (==0.38.1)"]
 fsspec = ["gcsfs (>=2024.9.0)", "s3fs (>=2024.9.0)"]
 llm = ["evaluate (>=0.4.1)", "litellm (>=1.60.4)", "openai (>=1.16.2)", "sentence-transformers (>=2.7.0)", "sqlvalidator (>=0.0.20)", "transformers[torch] (>=4.39.3)"]
 spark = ["pyspark (>=3.4.0)"]
@@ -4922,4 +4922,4 @@ test = ["big-O", "importlib-resources ; python_version < \"3.9\"", "jaraco.funct
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<3.12"
-content-hash = "ee6a8ec56efc1a22877e500a3faecc3dea0719eb5c2d9bfe29f42ece70ad2dcc"
+content-hash = "a5a05b343429cdc11813755a4d6677bf76d07380083814e55ba2ee671328bd29"
