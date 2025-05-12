@@ -1589,14 +1589,14 @@ files = [
 
 [[package]]
 name = "kaggle"
-version = "1.7.4.2"
+version = "1.7.4.5"
 description = "Access Kaggle resources anywhere"
 optional = false
 python-versions = ">=3.7"
 groups = ["main"]
 files = [
-    {file = "kaggle-1.7.4.2-py3-none-any.whl", hash = "sha256:f25fec160651e05599b78d9ad3e00958d533172cfad02fcb2d202ac87e65e18e"},
-    {file = "kaggle-1.7.4.2.tar.gz", hash = "sha256:0b144358f4187bde83e8a0335549bf736fb466697272a135a985eb6d2c6f9cb6"},
+    {file = "kaggle-1.7.4.5-py3-none-any.whl", hash = "sha256:9732afb1c073f14acc7e49dfab98456f887d10b735bcd6348bc1340e92393882"},
+    {file = "kaggle-1.7.4.5.tar.gz", hash = "sha256:1d9821bd6a6a1470741c76d26495a18475b5a7bfe0c80b19191254b2735d41dd"},
 ]
 
 [package.dependencies]
