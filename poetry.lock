@@ -904,14 +904,14 @@ yaml = ["ruamel.yaml"]
 
 [[package]]
 name = "evidently"
-version = "0.7.5"
+version = "0.7.8"
 description = "Open-source tools to analyze, monitor, and debug machine learning model in production."
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "evidently-0.7.5-py3-none-any.whl", hash = "sha256:d18164b19eda0c98157704110e97987a7a29a90cfe38028e54dbf9caee584bb3"},
-    {file = "evidently-0.7.5.tar.gz", hash = "sha256:e27a9591d7cb8514bf64bfde35a7227ad9f216f3c091d602fe209a7d03779ff5"},
+    {file = "evidently-0.7.8-py3-none-any.whl", hash = "sha256:2df6890f6ccd00ed9252ed514a5a83d704cbda9313edc563a558778645767005"},
+    {file = "evidently-0.7.8.tar.gz", hash = "sha256:8d3795d8b7c64111ff86adaf1a30dfe51772f953bb46694422253298cc4cd029"},
 ]
 
 [package.dependencies]
@@ -945,7 +945,7 @@ watchdog = ">=3.0.0"
 dev = ["httpx (==0.27.0)", "jupyter (==1.0.0)", "mypy (==1.1.1)", "pandas-stubs (>=1.3.5)", "pillow (>=10.3.0)", "pip-audit (>=2.7.2)", "pre-commit (==3.5.0)", "pytest (==7.4.4)", "pytest-asyncio (==0.23.7)", "pytest-mock (==3.14.0)", "ruff (==0.3.7)", "setuptools (==65.5.1) ; python_version < \"3.12\"", "setuptools (==68.2.2) ; python_version >= \"3.12\"", "types-PyYAML (==6.0.1)", "types-dataclasses (==0.6)", "types-python-dateutil (==2.8.19)", "types-requests (==2.26.0)", "types-ujson (>=5.4.0)", "wheel (==0.38.1)"]
 fsspec = ["gcsfs (>=2024.9.0)", "s3fs (>=2024.9.0)"]
 llm = ["evaluate (>=0.4.1)", "litellm (>=1.60.4)", "openai (>=1.16.2)", "sentence-transformers (>=2.7.0)", "sqlvalidator (>=0.0.20)", "transformers[torch] (>=4.39.3)"]
-spark = ["pyspark (>=3.4.0)"]
+spark = ["pyspark (>=3.4.0,<4)"]
 
 [[package]]
 name = "executing"
@@ -4926,4 +4926,4 @@ test = ["big-O", "importlib-resources ; python_version < \"3.9\"", "jaraco.funct
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<3.12"
-content-hash = "820fee8b2bfd1ba718ef9da40608220a799ed91d839312ed7e3e774da2ca00f2"
+content-hash = "c92265b45825d5426ed60c3bd49282b4ce6d08b349c2db36843e6b25e4872a95"
