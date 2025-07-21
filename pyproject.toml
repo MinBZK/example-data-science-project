@@ -11,24 +11,24 @@ kaleido = "1.0.0"
 pycaret = "^3.3.2"
 pandas = "2.1.4"
 kaggle = "^1.7.4"
-xgboost = "^2.1.4"
+xgboost = "^3.0.2"
 catboost = "^1.2.8"
 fairlearn = "^0.12.0"
 matplotlib = "3.7.5"
 aif360 = "^0.6.1"
-evidently = "^0.7.8"
-isort = "^5.13.2"
+evidently = "^0.7.11"
+isort = "^6.0.1"
 pre-commit = "4.2.0"
-ruff = "0.11.11"
+ruff = "0.12.4"
 
 [tool.poetry.group.test.dependencies]
-pytest = "^8.3.5"
+pytest = "^8.4.1"
 coverage = "^7.9.1"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.11.11"
+ruff = "^0.12.4"
 pre-commit = "^4.2.0"
-pyright = "^1.1.402"
+pyright = "^1.1.403"
 
 [build-system]
 requires = ["poetry-core"]
