@@ -945,14 +945,14 @@ yaml = ["ruamel.yaml"]
 
 [[package]]
 name = "evidently"
-version = "0.7.15"
+version = "0.7.17"
 description = "Open-source tools to analyze, monitor, and debug machine learning model in production."
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "evidently-0.7.15-py3-none-any.whl", hash = "sha256:ada69665f062382b7dbc65ed0ab64ad23219fa2badd09c7eea4b3ad082b9a4bb"},
-    {file = "evidently-0.7.15.tar.gz", hash = "sha256:373a97d173f2e152ab933047868c05d83ba80e6fc2e9d958f3db90de12946d67"},
+    {file = "evidently-0.7.17-py3-none-any.whl", hash = "sha256:c32cb03238fbbadf7cb044a4de88b98fe36e14972e27e54c2880ba68763c4af9"},
+    {file = "evidently-0.7.17.tar.gz", hash = "sha256:229a740ebec09164ea67f4287acaf4013084d5478e74a6bf91bfb17216eb16bf"},
 ]
 
 [package.dependencies]
@@ -965,6 +965,7 @@ iterative-telemetry = ">=0.0.5"
 litestar = ">=2.8.3"
 nltk = ">=3.6.7"
 numpy = ">=1.22.0"
+opentelemetry-proto = ">=1.25.0"
 pandas = {version = ">=1.3.5", extras = ["parquet"]}
 plotly = ">=5.10.0,<6"
 pydantic = ">=1.10.16"
@@ -983,12 +984,13 @@ uvicorn = {version = ">=0.22.0", extras = ["standard"]}
 watchdog = ">=3.0.0"
 
 [package.extras]
-dev = ["httpx (==0.27.0)", "jupyter (==1.0.0)", "mypy (==1.1.1)", "pandas-stubs (>=1.3.5)", "pillow (>=11.3.0)", "pip-audit (>=2.7.2)", "pre-commit (==3.5.0)", "pytest (==7.4.4)", "pytest-asyncio (==0.23.7)", "pytest-mock (==3.14.0)", "ruff (==0.3.7)", "setuptools (==65.5.1) ; python_version < \"3.12\"", "setuptools (==68.2.2) ; python_version >= \"3.12\"", "tracely (==0.2.9)", "types-PyYAML (==6.0.1)", "types-dataclasses (==0.6)", "types-python-dateutil (==2.8.19)", "types-requests (==2.26.0)", "types-ujson (>=5.4.0)", "wheel (==0.38.1)"]
+dev = ["httpx (==0.27.0)", "jupyter (==1.0.0)", "mypy (==1.1.1)", "pandas-stubs (>=1.3.5)", "pillow (>=11.3.0)", "pip-audit (>=2.7.2)", "pre-commit (==3.5.0)", "pytest (==7.4.4)", "pytest-asyncio (==0.23.7)", "pytest-mock (==3.14.0)", "ruff (==0.3.7)", "setuptools (==65.5.1) ; python_version < \"3.12\"", "setuptools (==68.2.2) ; python_version >= \"3.12\"", "tracely (>=0.2.11)", "types-PyYAML (==6.0.1)", "types-dataclasses (==0.6)", "types-python-dateutil (==2.8.19)", "types-requests (==2.26.0)", "types-ujson (>=5.4.0)", "wheel (==0.38.1)"]
 fsspec = ["gcsfs (>=2024.9.0)", "s3fs (>=2024.9.0)"]
 gcs = ["gcsfs (>=2024.9.0)"]
 llm = ["evaluate (>=0.4.1)", "faiss-cpu (>=1.8.0)", "litellm (>=1.74.3)", "llama-index (>=0.10)", "openai (>=1.16.2)", "sentence-transformers (>=2.7.0)", "sqlvalidator (>=0.0.20)", "transformers[torch] (>=4.39.3)"]
 s3 = ["s3fs (>=2024.9.0)"]
 spark = ["pyspark (>=3.4.0,<4)"]
+sql = ["alembic (>=1.13.0)", "psycopg2-binary (>=2.9.0)", "sqlalchemy (>=2.0.0)"]
 
 [[package]]
 name = "executing"
@@ -2494,6 +2496,21 @@ files = [
     {file = "nvidia_nccl_cu12-2.25.1-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:4ab428bc915785cc66e8c57cb34c7a64cf739c46702b8db748b6ad6cc7180cf8"},
     {file = "nvidia_nccl_cu12-2.25.1-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:362aed5963fb9ea2ed2f264409baae30143498fd0e5c503aeaa1badd88cdc54a"},
 ]
+
+[[package]]
+name = "opentelemetry-proto"
+version = "1.38.0"
+description = "OpenTelemetry Python Proto"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "opentelemetry_proto-1.38.0-py3-none-any.whl", hash = "sha256:b6ebe54d3217c42e45462e2a1ae28c3e2bf2ec5a5645236a490f55f45f1a0a18"},
+    {file = "opentelemetry_proto-1.38.0.tar.gz", hash = "sha256:88b161e89d9d372ce723da289b7da74c3a8354a8e5359992be813942969ed468"},
+]
+
+[package.dependencies]
+protobuf = ">=5.0,<7.0"
 
 [[package]]
 name = "orjson"
@@ -5202,4 +5219,4 @@ test = ["big-O", "importlib-resources ; python_version < \"3.9\"", "jaraco.funct
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<3.12"
-content-hash = "137c4ee2d944f36a374ab2db42d429c279916172251428f9a2159fb770991287"
+content-hash = "480fe6d097a58ef0125393d3f9bb28f706486d315b954d1dedeb2f25ef89d381"
