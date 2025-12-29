@@ -960,14 +960,14 @@ yaml = ["ruamel.yaml"]
 
 [[package]]
 name = "evidently"
-version = "0.7.17"
+version = "0.7.18"
 description = "Open-source tools to analyze, monitor, and debug machine learning model in production."
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "evidently-0.7.17-py3-none-any.whl", hash = "sha256:c32cb03238fbbadf7cb044a4de88b98fe36e14972e27e54c2880ba68763c4af9"},
-    {file = "evidently-0.7.17.tar.gz", hash = "sha256:229a740ebec09164ea67f4287acaf4013084d5478e74a6bf91bfb17216eb16bf"},
+    {file = "evidently-0.7.18-py3-none-any.whl", hash = "sha256:6d00dc5e6e8483369d9a432edcfb3f7070254b69316f3a5a234d7851d954f06c"},
+    {file = "evidently-0.7.18.tar.gz", hash = "sha256:b4202570676b3a5f1b696cb8eb4249a2cdd7d195f1d188d05c4b87e9507f7a3e"},
 ]
 
 [package.dependencies]
@@ -977,7 +977,7 @@ deprecation = ">=2.1.0"
 dynaconf = ">=3.2.4"
 fsspec = ">=2024.6.1"
 iterative-telemetry = ">=0.0.5"
-litestar = ">=2.8.3"
+litestar = ">=2.19.0"
 nltk = ">=3.6.7"
 numpy = ">=1.22.0"
 opentelemetry-proto = ">=1.25.0"
@@ -1946,14 +1946,14 @@ scikit-learn = ["scikit-learn (>=0.24.2)"]
 
 [[package]]
 name = "litestar"
-version = "2.18.0"
+version = "2.19.0"
 description = "Litestar - A production-ready, highly performant, extensible ASGI API Framework"
 optional = false
 python-versions = "<4.0,>=3.8"
 groups = ["main"]
 files = [
-    {file = "litestar-2.18.0-py3-none-any.whl", hash = "sha256:459ec993bafe47245c981d802a0a0c73f47c98313b3c4e47923eebe978f0e511"},
-    {file = "litestar-2.18.0.tar.gz", hash = "sha256:be8f91813854722b7a2f37cbb57d76977050a96b2427d3c4455d406f0f4fcd50"},
+    {file = "litestar-2.19.0-py3-none-any.whl", hash = "sha256:849971d097a6118f81235531fc0f342d797bd29d9aef9c23230559f124d16247"},
+    {file = "litestar-2.19.0.tar.gz", hash = "sha256:c2663a7f48a7ed273615260c23fc76dbef2ca0d539ece25318772b737470c531"},
 ]
 
 [package.dependencies]
@@ -1968,15 +1968,16 @@ polyfactory = ">=2.6.3"
 pyyaml = "*"
 rich = ">=13.0.0"
 rich-click = "*"
+sniffio = ">=1.3.1"
 typing-extensions = "*"
 
 [package.extras]
 annotated-types = ["annotated-types"]
 attrs = ["attrs"]
 brotli = ["brotli"]
-cli = ["jsbeautifier", "uvicorn[standard]", "uvloop (>=0.18.0) ; sys_platform != \"win32\""]
+cli = ["jsbeautifier", "uvicorn[standard]"]
 cryptography = ["cryptography"]
-full = ["advanced-alchemy (>=0.2.2)", "annotated-types", "attrs", "brotli", "cryptography", "email-validator", "fast-query-parsers (>=1.0.2)", "jinja2", "jinja2 (>=3.1.2)", "jsbeautifier", "mako (>=1.2.4)", "minijinja (>=1.0.0)", "opentelemetry-instrumentation-asgi", "piccolo", "picologging ; python_version < \"3.13\"", "prometheus-client", "pydantic", "pydantic-extra-types (!=2.9.0) ; python_version < \"3.9\"", "pydantic-extra-types ; python_version >= \"3.9\"", "pyjwt (>=2.9.0)", "redis[hiredis] (>=4.4.4,<5.3)", "structlog", "uvicorn[standard]", "uvloop (>=0.18.0) ; sys_platform != \"win32\"", "valkey[libvalkey] (>=6.0.2)"]
+full = ["advanced-alchemy (>=0.2.2)", "annotated-types", "attrs", "brotli", "cryptography", "email-validator", "fast-query-parsers (>=1.0.2)", "jinja2", "jinja2 (>=3.1.2)", "jsbeautifier", "mako (>=1.2.4)", "minijinja (>=1.0.0)", "opentelemetry-instrumentation-asgi", "piccolo", "picologging ; python_version < \"3.13\"", "prometheus-client", "pydantic", "pydantic-extra-types (!=2.9.0) ; python_version < \"3.9\"", "pydantic-extra-types ; python_version >= \"3.9\"", "pyjwt (>=2.9.0)", "redis[hiredis] (>=4.4.4,<5.3)", "structlog", "uvicorn[standard]", "valkey[libvalkey] (>=6.0.2)"]
 jinja = ["jinja2 (>=3.1.2)"]
 jwt = ["cryptography", "pyjwt (>=2.9.0)"]
 mako = ["mako (>=1.2.4)"]
@@ -1988,7 +1989,7 @@ prometheus = ["prometheus-client"]
 pydantic = ["email-validator", "pydantic", "pydantic-extra-types (!=2.9.0) ; python_version < \"3.9\"", "pydantic-extra-types ; python_version >= \"3.9\""]
 redis = ["redis[hiredis] (>=4.4.4,<5.3)"]
 sqlalchemy = ["advanced-alchemy (>=0.2.2)"]
-standard = ["fast-query-parsers (>=1.0.2)", "jinja2", "jsbeautifier", "uvicorn[standard]", "uvloop (>=0.18.0) ; sys_platform != \"win32\""]
+standard = ["fast-query-parsers (>=1.0.2)", "jinja2", "jsbeautifier", "uvicorn[standard]"]
 structlog = ["structlog"]
 valkey = ["valkey[libvalkey] (>=6.0.2)"]
 
@@ -5449,4 +5450,4 @@ test = ["big-O", "importlib-resources ; python_version < \"3.9\"", "jaraco.funct
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<3.12"
-content-hash = "e022beb8775fe3c20152cbaeed435c5e190b50d5f930058fbba91b33f82f1504"
+content-hash = "08f55fcbbe439d2b7cad8a9320248ddb1480ed77129970159a124e58c13ca435"
