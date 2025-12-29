@@ -1657,26 +1657,26 @@ files = [
 
 [[package]]
 name = "kaggle"
-version = "1.8.2"
+version = "1.8.3"
 description = "Access Kaggle resources anywhere"
 optional = false
 python-versions = ">=3.11"
 groups = ["main"]
 files = [
-    {file = "kaggle-1.8.2-py3-none-any.whl", hash = "sha256:5cbe52d0d225ce69222afd02121e781f614534dd8633370a5124d7de29596a66"},
-    {file = "kaggle-1.8.2.tar.gz", hash = "sha256:d3945c32ce6f81046592d14f6d233ee1aec92769682fce4b05b3409e086db5f7"},
+    {file = "kaggle-1.8.3-py3-none-any.whl", hash = "sha256:17c1426e8a3650b2ac038885fcd3b0f3c590b7b5b073191fda0460548f71cb3d"},
+    {file = "kaggle-1.8.3.tar.gz", hash = "sha256:3335da5752ae2843c3aa0523b7a7ed91a8dd5505c19cb4031f9d57651c346106"},
 ]
 
 [package.dependencies]
 black = ">=24.10.0"
 bleach = "*"
-kagglesdk = "*"
+kagglesdk = ">=0.1.14,<1.0"
 mypy = ">=1.15.0"
+packaging = "*"
 protobuf = "*"
 python-dateutil = "*"
 python-slugify = "*"
 requests = "*"
-setuptools = ">=21.0.0"
 six = ">=1.10"
 tqdm = "*"
 types-requests = "*"
@@ -1685,14 +1685,14 @@ urllib3 = ">=1.15.1"
 
 [[package]]
 name = "kagglesdk"
-version = "0.1.13"
+version = "0.1.14"
 description = "Bindings to access kaggle's external-facing APIs"
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "kagglesdk-0.1.13-py3-none-any.whl", hash = "sha256:76a96b6bd0379482b3e53cd8ecfa7d181e6cf2b43c105bee32798cd06cf93eab"},
-    {file = "kagglesdk-0.1.13.tar.gz", hash = "sha256:5cecab69ab0d242b6a760f146fc77e0810b34b46e90d3e4104e4a1ba37bcd39f"},
+    {file = "kagglesdk-0.1.14-py3-none-any.whl", hash = "sha256:a06feff062d8a1344ca7d378bfccdee4fd6b0b1b4e236fdafe23fefb730ee17f"},
+    {file = "kagglesdk-0.1.14.tar.gz", hash = "sha256:ac37d7d7fcb9cf92d37319ec65b433686ca5c2f0f28a434a1104855a5f9c24cc"},
 ]
 
 [package.dependencies]
@@ -5449,4 +5449,4 @@ test = ["big-O", "importlib-resources ; python_version < \"3.9\"", "jaraco.funct
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<3.12"
-content-hash = "b475ae46de56224862da8b855b6ac11f2f7521573a83711a96c879bb6c11690c"
+content-hash = "057d5632d56349418841d232f07c6aefdd97681effae1b764cc542efa9444915"
