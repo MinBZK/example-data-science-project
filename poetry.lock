@@ -960,14 +960,14 @@ yaml = ["ruamel.yaml"]
 
 [[package]]
 name = "evidently"
-version = "0.7.18"
+version = "0.7.20"
 description = "Open-source tools to analyze, monitor, and debug machine learning model in production."
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "evidently-0.7.18-py3-none-any.whl", hash = "sha256:6d00dc5e6e8483369d9a432edcfb3f7070254b69316f3a5a234d7851d954f06c"},
-    {file = "evidently-0.7.18.tar.gz", hash = "sha256:b4202570676b3a5f1b696cb8eb4249a2cdd7d195f1d188d05c4b87e9507f7a3e"},
+    {file = "evidently-0.7.20-py3-none-any.whl", hash = "sha256:af75da94c321d642b9706e64841abb78421cfda110f375ecfa0f157dcbbb0bef"},
+    {file = "evidently-0.7.20.tar.gz", hash = "sha256:726d6ebdc4e29a94a27a2ee28546e076055aebcdb9d43b2e5126ae23483b8fbd"},
 ]
 
 [package.dependencies]
@@ -975,7 +975,7 @@ certifi = ">=2024.7.4"
 cryptography = ">=43.0.1"
 deprecation = ">=2.1.0"
 dynaconf = ">=3.2.4"
-fsspec = ">=2024.6.1"
+fsspec = ">=2024.9.0"
 iterative-telemetry = ">=0.0.5"
 litestar = ">=2.19.0"
 nltk = ">=3.6.7"
@@ -984,7 +984,7 @@ opentelemetry-proto = ">=1.25.0"
 pandas = {version = ">=1.3.5", extras = ["parquet"]}
 plotly = ">=5.10.0,<6"
 pydantic = ">=1.10.16"
-PyYAML = ">=5.4"
+pyyaml = ">=5.4"
 requests = ">=2.32.0"
 rich = ">=13"
 scikit-learn = ">=1.1.1"
@@ -999,7 +999,7 @@ uvicorn = {version = ">=0.22.0", extras = ["standard"]}
 watchdog = ">=3.0.0"
 
 [package.extras]
-dev = ["httpx (==0.27.0)", "jupyter (==1.0.0)", "mypy (==1.1.1)", "pandas-stubs (>=1.3.5)", "pillow (>=11.3.0)", "pip-audit (>=2.7.2)", "pre-commit (==3.5.0)", "pytest (==7.4.4)", "pytest-asyncio (==0.23.7)", "pytest-mock (==3.14.0)", "ruff (==0.3.7)", "setuptools (==65.5.1) ; python_version < \"3.12\"", "setuptools (==68.2.2) ; python_version >= \"3.12\"", "tracely (>=0.2.11)", "types-PyYAML (==6.0.1)", "types-dataclasses (==0.6)", "types-python-dateutil (==2.8.19)", "types-requests (==2.26.0)", "types-ujson (>=5.4.0)", "wheel (==0.38.1)"]
+dev = ["httpx (==0.27.0)", "jupyter (==1.0.0)", "mypy (==1.1.1)", "pandas-stubs (>=1.3.5)", "pillow (>=11.3.0)", "pip-audit (>=2.7.2)", "pre-commit (==3.5.0)", "pytest (==7.4.4)", "pytest-asyncio (==0.23.7)", "pytest-mock (==3.14.0)", "ruff (==0.3.7)", "setuptools (==65.5.1) ; python_version < \"3.12\"", "setuptools (==68.2.2) ; python_version >= \"3.12\"", "tracely (>=0.2.11)", "types-dataclasses (==0.6)", "types-python-dateutil (==2.8.19)", "types-pyyaml (==6.0.1)", "types-requests (==2.26.0)", "types-ujson (>=5.4.0)", "wheel (==0.38.1)"]
 fsspec = ["gcsfs (>=2024.9.0)", "s3fs (>=2024.9.0)"]
 gcs = ["gcsfs (>=2024.9.0)"]
 llm = ["evaluate (>=0.4.1)", "faiss-cpu (>=1.8.0)", "litellm (>=1.74.3)", "llama-index (>=0.10)", "openai (>=1.16.2)", "sentence-transformers (>=2.7.0)", "sqlvalidator (>=0.0.20)", "transformers[torch] (>=4.39.3)"]
@@ -5450,4 +5450,4 @@ test = ["big-O", "importlib-resources ; python_version < \"3.9\"", "jaraco.funct
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<3.12"
-content-hash = "4aeaaab463c062bbc4139f91140978cca4d23051187e71ede8d1493875c79219"
+content-hash = "173bbe4d4636a4a4d86949b147944bc46fd0d56c296fbc0b77382919d80294c7"
