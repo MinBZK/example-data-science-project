@@ -1625,14 +1625,14 @@ files = [
 
 [[package]]
 name = "kaggle"
-version = "1.8.4"
+version = "2.0.0"
 description = "Access Kaggle resources anywhere"
 optional = false
 python-versions = ">=3.11"
 groups = ["main"]
 files = [
-    {file = "kaggle-1.8.4-py3-none-any.whl", hash = "sha256:b9cb6da6e99ce8ef22f8e84e75da2c82f814c2e548bfa07f3db220c9aeeaa8ba"},
-    {file = "kaggle-1.8.4.tar.gz", hash = "sha256:d71137f98312581726047cadceb28992c53ef905fe38c6dd9d6d3bfc4e43c982"},
+    {file = "kaggle-2.0.0-py3-none-any.whl", hash = "sha256:91b3f717e529e57dd40c6c44513e25218674636fb1b143031370ad33c5f1a7e2"},
+    {file = "kaggle-2.0.0.tar.gz", hash = "sha256:34cb700cec37273a39ca54f4b18bebc3b6609d08bd03351fc205f9178f79f9ca"},
 ]
 
 [package.dependencies]
@@ -5212,4 +5212,4 @@ test = ["big-O", "importlib-resources ; python_version < \"3.9\"", "jaraco.funct
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<3.12"
-content-hash = "0cf5d85151c08e69bbb7f583d0952656166faf765680117944405b6dd5ab2a28"
+content-hash = "ec23c030063fbb2bc7b394402c25ebaed65a749ed4ff2f774a9c7213dbb39c47"
