@@ -1,17 +1,21 @@
 # This repository adheres to the publiccode.yml standard by including this
 # metadata file that makes public software easily discoverable.
-# More info at https://github.com/italia/publiccode.yml
+# More info at https://github.com/publiccodeyml/publiccode.yml
 
-publiccodeYmlVersion: '0.2'
+publiccodeYmlVersion: '0'
 categories:
   - it-development
 description:
   en:
     features:
       - Python Template
-    genericName: example_datascience
     longDescription: |
-      This a an example data science project
+      This repository contains a typical example of a data science project
+      written in Python. It is used for testing purposes when a realistic
+      example of an algorithm in use by the Dutch Government is needed.
+      The project covers the typical steps of a data science workflow:
+      exploratory data analysis, data preparation, model training,
+      model evaluation, serving results and monitoring.
     shortDescription: Example Data Science project
 developmentStatus: concept
 legal:
